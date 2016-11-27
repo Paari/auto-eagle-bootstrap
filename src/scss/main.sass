@@ -1,0 +1,28 @@
+$font-stack:    Helvetica, sans-serif
+$primary-color: #333
+
+body
+  color: $primary-color
+
+p
+  color: red
+
+  span 
+    font-style: italic
+
+    &.test
+      color: #4545ff
+      background: orange
+
+@media screen and (max-width: 700px)
+  p
+    color: #000000
+    text-align: center
+
+
+/* the comments will be transfered, I think so */
+.the-div
+  font-size: 10px
+
+  &.test-div 
+    font-size: 15px

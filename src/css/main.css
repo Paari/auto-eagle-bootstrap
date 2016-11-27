@@ -1,0 +1,22 @@
+body {
+  color: #333; }
+
+p {
+  color: red; }
+  p span {
+    font-style: italic; }
+    p span.test {
+      color: #4545ff;
+      background: orange; }
+
+@media screen and (max-width: 700px) {
+  p {
+    color: #000000;
+    text-align: center; } }
+/* the comments will be transfered, I think so */
+.the-div {
+  font-size: 10px; }
+  .the-div.test-div {
+    font-size: 15px; }
+
+/*# sourceMappingURL=main.css.map */
