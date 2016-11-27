@@ -42,7 +42,7 @@ module.exports = {
 	// JS
 	// default value: ['src/js/**.js']
 	jsConcatSrc: 'src/js/**.js',
-	// default value: 
+	// default value:
 	jsConcatDest: 'src/build/js/main.js',
 
 	// CSS
@@ -60,5 +60,5 @@ module.exports = {
 	// --------------------
 	// default value: ['build/**', 'html/**', 'img/**']
 	distFiles: ['build/**', 'html/**', 'img/**', 'fonts/**']
-	
-}
+
+};

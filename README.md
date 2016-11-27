@@ -1,1 +1,1 @@
-#Frontend Build process
+#Front-end Build process

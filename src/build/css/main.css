@@ -1,5 +1,8 @@
 body {
-  color: #333; }
+  color: #303030; }
+
+h1 {
+  font-size: 10px; }
 
 p {
   color: red; }

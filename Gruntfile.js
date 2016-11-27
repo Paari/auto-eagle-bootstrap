@@ -11,14 +11,28 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        
+        browserSync: {
+            dev: {
+                bsFiles: {
+                    src : [
+                        'src/build/**',
+                        'src/*.html'
+                    ]
+                },
+                options: {
+                    watchTask: true,
+                    server: './src'
+                }
+            }
+        },
+
         watch: {
             css: {
-              files: config.sass,
-              tasks: ['sass', concatTask],
-              options: {
-                spawn: false,
-              },
+                files: config.sass,
+                tasks: ['sass', concatTask],
+                options: {
+                    spawn: false,
+                },
             },
             all: {
                 files: ['src/**'],
@@ -28,7 +42,7 @@ module.exports = function(grunt) {
                     livereload: true
                 },
             }
-          },
+        },
         express: {
             all: {
                 options: {
@@ -45,7 +59,12 @@ module.exports = function(grunt) {
                 files: [
 
                     // includes files within path and its sub-directories
-                    { expand: true, cwd: 'src/', src: config.distFiles, dest: 'dist/' },
+                    {
+                        expand: true,
+                        cwd: 'src/',
+                        src: config.distFiles,
+                        dest: 'dist/'
+                    },
 
                 ],
             },
@@ -59,46 +78,48 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     cwd: 'src/scss',
-                    src: ['*.sass','*.scss'],
+                    src: ['*.sass', '*.scss'],
                     dest: 'src/css',
                     ext: '.css'
                 }]
             }
         },
 
-        imagemin: {                          // Task
-            static: {                          // Target
-              options: {                       // Target options
-                optimizationLevel: 3,
-                svgoPlugins: [{ removeViewBox: false }],
-                use: [mozjpeg()]
-              },
-              files: {                         // Dictionary of files
-                'dist/img/**.png': 'src/img/**.png', // 'destination': 'source'
-                'dist/img/**.jpg': 'src/img/**.jpg',
-                'dist/img/**.gif': 'src/img/**.gif'
-              }
+        imagemin: { // Task
+            static: { // Target
+                options: { // Target options
+                    optimizationLevel: 3,
+                    svgoPlugins: [{
+                        removeViewBox: false
+                    }],
+                    use: [mozjpeg()]
+                },
+                files: { // Dictionary of files
+                    'dist/img/**.png': 'src/img/**.png', // 'destination': 'source'
+                    'dist/img/**.jpg': 'src/img/**.jpg',
+                    'dist/img/**.gif': 'src/img/**.gif'
+                }
             },
-            dynamic: {                         // Another target
-              files: [{
-                expand: true,                  // Enable dynamic expansion
-                cwd: 'src/img/',                   // Src matches are relative to this path
-                src: ['**/*.{png,jpg,jpeg,gif}'],   // Actual patterns to match
-                dest: 'dist/'                  // Destination path prefix
-              }]
+            dynamic: { // Another target
+                files: [{
+                    expand: true, // Enable dynamic expansion
+                    cwd: 'src/img/', // Src matches are relative to this path
+                    src: ['**/*.{png,jpg,jpeg,gif}'], // Actual patterns to match
+                    dest: 'dist/' // Destination path prefix
+                }]
             }
-          },
+        },
 
-          concat: {
+        concat: {
             js: {
-              src: config.jsConcatSrc,
-              dest: config.jsConcatDest,
+                src: config.jsConcatSrc,
+                dest: config.jsConcatDest,
             },
             css: {
-              src: config.cssConcatSrc,
-              dest: config.cssConcatDest,
+                src: config.cssConcatSrc,
+                dest: config.cssConcatDest,
             },
-          },
+        },
 
     });
 
@@ -112,10 +133,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     // =default task
-    grunt.registerTask('default', ['express', 'watch']);
+    grunt.registerTask('default', ['browserSync', 'watch']);
 
     // =server task
-    grunt.registerTask('server', ['express', 'watch']);
+    grunt.registerTask('server', ['browserSync', 'watch']);
 
     // =copy task: this task will copy needed files to "dist" (Distribution directory)
     grunt.registerTask('build-production', ['copy']);
@@ -128,7 +149,10 @@ module.exports = function(grunt) {
 
     // =test task: this is to check if grunt is successfuly setup or not
     grunt.registerTask("test", function() {
-        console.log("\n\n-----------------------------------\n" + config.cool + "\n-----------------------------------\n\n")
+        console.log("\n\n-----------------------------------\n" + config.cool + "\n-----------------------------------\n\n");
     });
+
+    // browsersync task
+    grunt.loadNpmTasks('grunt-browser-sync');
 
 };
