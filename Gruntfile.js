@@ -4,7 +4,6 @@ var concatTask = 'concat:' + config.concatOnly;
 
 module.exports = function(grunt) {
 
-
     // This is where the magic happens
     // -------------------------------
     "use strict";
@@ -14,10 +13,7 @@ module.exports = function(grunt) {
         browserSync: {
             dev: {
                 bsFiles: {
-                    src : [
-                        'src/build/**',
-                        'src/*.html'
-                    ]
+                    src: ['src/build/**', 'src/*.html']
                 },
                 options: {
                     watchTask: true,
@@ -29,10 +25,12 @@ module.exports = function(grunt) {
         watch: {
             css: {
                 files: config.sass,
-                tasks: ['sass', concatTask],
+                tasks: [
+                    'sass', concatTask, 'less'
+                ],
                 options: {
-                    spawn: false,
-                },
+                    spawn: false
+                }
             },
             all: {
                 files: ['src/**'],
@@ -40,7 +38,7 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false,
                     livereload: true
-                },
+                }
             }
         },
         express: {
@@ -56,18 +54,15 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                files: [
-
-                    // includes files within path and its sub-directories
+                files: [// includes files within path and its sub-directories
                     {
                         expand: true,
                         cwd: 'src/',
                         src: config.distFiles,
                         dest: 'dist/'
-                    },
-
-                ],
-            },
+                    }
+                ]
+            }
         },
 
         sass: {
@@ -75,13 +70,28 @@ module.exports = function(grunt) {
                 options: {
                     style: config.cssStyle
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'src/scss',
-                    src: ['*.sass', '*.scss'],
-                    dest: 'src/css',
-                    ext: '.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/scss',
+                        src: [
+                            '*.sass', '*.scss'
+                        ],
+                        dest: 'src/css',
+                        ext: '.css'
+                    }
+                ]
+            }
+        },
+
+        less: {
+            development: {
+                options: {
+                    paths: ['src/less']
+                },
+                files: {
+                    'src/build/css/main.css': 'src/less/source.less'
+                }
             }
         },
 
@@ -89,9 +99,11 @@ module.exports = function(grunt) {
             static: { // Target
                 options: { // Target options
                     optimizationLevel: 3,
-                    svgoPlugins: [{
-                        removeViewBox: false
-                    }],
+                    svgoPlugins: [
+                        {
+                            removeViewBox: false
+                        }
+                    ],
                     use: [mozjpeg()]
                 },
                 files: { // Dictionary of files
@@ -101,30 +113,32 @@ module.exports = function(grunt) {
                 }
             },
             dynamic: { // Another target
-                files: [{
-                    expand: true, // Enable dynamic expansion
-                    cwd: 'src/img/', // Src matches are relative to this path
-                    src: ['**/*.{png,jpg,jpeg,gif}'], // Actual patterns to match
-                    dest: 'dist/' // Destination path prefix
-                }]
+                files: [
+                    {
+                        expand: true, // Enable dynamic expansion
+                        cwd: 'src/img/', // Src matches are relative to this path
+                        src: ['**/*.{png,jpg,jpeg,gif}'], // Actual patterns to match
+                        dest: 'dist/' // Destination path prefix
+                    }
+                ]
             }
         },
 
         concat: {
             js: {
                 src: config.jsConcatSrc,
-                dest: config.jsConcatDest,
+                dest: config.jsConcatDest
             },
             css: {
                 src: config.cssConcatSrc,
-                dest: config.cssConcatDest,
-            },
-        },
-
+                dest: config.cssConcatDest
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
     // =server task
     grunt.loadNpmTasks('grunt-express');

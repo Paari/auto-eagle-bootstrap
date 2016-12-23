@@ -32,7 +32,7 @@ module.exports = {
 	// 4. Sass -> for SASS file compilation
 	// --------------------
 	// default value: ['src/scss/**']
-	sass: ['src/scss/**'],
+	sass: ['src/less/**'],
 	cssStyle: 'nested',
 
 
@@ -59,6 +59,6 @@ module.exports = {
 	// Build -> Folders to move to Distribution
 	// --------------------
 	// default value: ['build/**', 'html/**', 'img/**']
-	distFiles: ['build/**', 'html/**', 'img/**', 'fonts/**']
+	distFiles: ['build/**', '*.html', 'img/**', 'fonts/**', '*.png']
 
 };

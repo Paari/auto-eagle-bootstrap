@@ -1,30 +1,91 @@
-body {
-  color: #303030; }
-
-h1 {
-  font-size: 10px; }
-
-p {
-  color: red; }
-  p span {
-    font-style: italic; }
-    p span.test {
-      color: #4545ff;
-      background: orange; }
-
-@media screen and (max-width: 700px) {
-  p {
-    color: #000000;
-    text-align: center; } }
-/* the comments will be transfered, I think so */
-.the-div {
-  font-size: 10px; }
-  .the-div.test-div {
-    font-size: 15px; }
-
-/*# sourceMappingURL=main.css.map */
-
-p {
-  color: #000000; }
-
-/*# sourceMappingURL=style.css.map */
+.main-banner {
+  height: 100vh;
+  min-height: 700px;
+  margin-bottom: 0;
+  padding: 0;
+  background-image: url(../../img/background.jpg);
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+}
+.main-banner .banner-content {
+  color: #ffffff;
+}
+.main-banner .banner-content .tagline-container {
+  background-color: rgba(56, 60, 66, 0.9);
+  height: 100vh;
+  min-height: 700px;
+  display: table;
+}
+.main-banner .banner-content .tagline-container .logo {
+  margin: 45px;
+  position: absolute;
+}
+.main-banner .banner-content .tagline-container .main-heading {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 60px;
+  line-height: 1.1;
+  font-style: italic;
+  padding: 0 60px;
+  font-family: 'Lora', serif;
+  animation: entry-animation 1.2s ease-in-out;
+}
+@media screen and (max-width: 991px) {
+  .main-banner .banner-content .tagline-container .main-heading {
+    padding: 0 20px;
+  }
+}
+.main-banner .banner-content .download-section {
+  animation: entry-animation-down 1.5s;
+}
+@media screen and (min-width: 992px) {
+  .main-banner .banner-content .download-section {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+  }
+}
+.main-banner .banner-content .download-section .download-button {
+  position: absolute;
+  bottom: 45px;
+  right: 45px;
+  padding: 20px 50px;
+  border: none;
+  text-transform: uppercase;
+  background: #FC5225;
+  box-shadow: 0 5px 13px 0 rgba(251, 84, 38, 0.6);
+  border-radius: 100px;
+  font-size: 15px;
+  color: #FFFFFF;
+  letter-spacing: 0.6px;
+  line-height: 15px;
+}
+@keyframes entry-animation {
+  0% {
+    transform: translateY(40%) rotate(10deg);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(30%) rotate(10deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+@keyframes entry-animation-down {
+  0% {
+    transform: translateY(-40%);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
