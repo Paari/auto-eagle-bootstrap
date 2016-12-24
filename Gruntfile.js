@@ -24,9 +24,9 @@ module.exports = function(grunt) {
 
         watch: {
             css: {
-                files: config.sass,
+                files: config.styling,
                 tasks: [
-                    'sass', concatTask, 'less'
+                    config.preProcessor, concatTask
                 ],
                 options: {
                     spawn: false
