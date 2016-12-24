@@ -8,10 +8,21 @@
 	1. Test
 	2. Host
 	3. Port
-	4. Sass
+	4. CSS pre-processor
 	5. Concat
 */
 
+
+// Global settings
+// ===============
+
+// if you are using vanila CSS keep the variable blank
+// or set the value to less or sass if you are using any pre-processor
+var cssLang = 'less';
+var pathToWatch = 'src/'+cssLang+'/**';
+
+
+// exported settings, these value will be imported and used in the grunt file configuration
 module.exports = {
 
 	// 1. Test -> this is the welcome message when you run "test"
@@ -29,10 +40,11 @@ module.exports = {
 	port: 3000,
 
 
-	// 4. Sass -> for SASS file compilation
+	// 4. cssLang -> for using plane css or less or sass file compilation
 	// --------------------
-	// default value: ['src/scss/**']
-	sass: ['src/less/**'],
+	// Change to global setting on top.
+  preProcessor: cssLang,
+	styling: [pathToWatch],
 	cssStyle: 'nested',
 
 
