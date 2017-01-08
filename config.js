@@ -10,6 +10,7 @@
 	3. Port
 	4. CSS pre-processor
 	5. Concat
+  6. Build configuration
 */
 
 
@@ -19,9 +20,14 @@
 // if you are using vanila CSS keep the variable blank
 // or set the value to less or sass if you are using any pre-processor
 var cssLang = 'less';
+
+// do not modify this value
 var pathToWatch = 'src/'+cssLang+'/**';
 
 
+
+// Option settings
+// ===============
 // exported settings, these value will be imported and used in the grunt file configuration
 module.exports = {
 

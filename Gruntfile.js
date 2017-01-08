@@ -2,6 +2,13 @@ var config = require('./config.js');
 var mozjpeg = require('imagemin-mozjpeg');
 var concatTask = 'concat:' + config.concatOnly;
 
+// files to watch and compile/merge based on the CSS usage.
+if(config.preProcessor) {
+  var cssTypeTask = config.preProcessor;
+} else {
+  var cssTypeTask = concatTask;
+}
+
 module.exports = function(grunt) {
 
     // This is where the magic happens
@@ -26,7 +33,7 @@ module.exports = function(grunt) {
             css: {
                 files: config.styling,
                 tasks: [
-                    config.preProcessor, concatTask
+                    cssTypeTask
                 ],
                 options: {
                     spawn: false
