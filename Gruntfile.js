@@ -97,7 +97,7 @@ module.exports = function(grunt) {
                     paths: ['src/less']
                 },
                 files: {
-                    'src/build/css/main.css': 'src/less/source.less'
+                    'src/build/css/main.css' : config.sourceStyle
                 }
             }
         },

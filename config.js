@@ -53,6 +53,9 @@ module.exports = {
 	styling: [pathToWatch],
 	cssStyle: 'nested',
 
+  // Your parent stylesheet
+  sourceStyle: 'src/' + cssLang + '/source.less',
+
 
 	// 5. Concat -> murge file
 	// --------------------
